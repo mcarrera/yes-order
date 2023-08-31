@@ -30,6 +30,7 @@ namespace be_photosi_api.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError("Error in creating new order: ", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error in creating a new order : {ex}");
             }
 
