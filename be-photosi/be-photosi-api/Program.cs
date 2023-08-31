@@ -3,6 +3,8 @@ using System.Reflection;
 using be_photosi_api.Common;
 using Microsoft.Extensions.DependencyInjection;
 using be_photosi_api.Data.Entities;
+using be_photosi_api.Data.Repositories;
+using be_photosi_api.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -21,6 +23,7 @@ builder.Services.AddHttpContextAccessor();
 
 // inject items
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

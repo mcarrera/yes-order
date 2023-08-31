@@ -55,15 +55,9 @@ namespace be_photosi_api.Migrations
 
             modelBuilder.Entity("be_photosi_api.Data.Entities.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -80,7 +74,7 @@ namespace be_photosi_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DeliveryAddressId")
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
@@ -88,7 +82,7 @@ namespace be_photosi_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeliveryAddressId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("UserId");
 
@@ -103,6 +97,9 @@ namespace be_photosi_api.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
@@ -116,17 +113,12 @@ namespace be_photosi_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -141,7 +133,7 @@ namespace be_photosi_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -154,12 +146,12 @@ namespace be_photosi_api.Migrations
                 {
                     b.HasOne("be_photosi_api.Data.Entities.Address", "DeliveryAddress")
                         .WithMany()
-                        .HasForeignKey("DeliveryAddressId")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("be_photosi_api.Data.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -172,13 +164,13 @@ namespace be_photosi_api.Migrations
             modelBuilder.Entity("be_photosi_api.Data.Entities.OrderProduct", b =>
                 {
                     b.HasOne("be_photosi_api.Data.Entities.Order", "Order")
-                        .WithMany("Products")
+                        .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("be_photosi_api.Data.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("OrderProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -191,7 +183,7 @@ namespace be_photosi_api.Migrations
             modelBuilder.Entity("be_photosi_api.Data.Entities.Product", b =>
                 {
                     b.HasOne("be_photosi_api.Data.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -199,9 +191,24 @@ namespace be_photosi_api.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("be_photosi_api.Data.Entities.Order", b =>
+            modelBuilder.Entity("be_photosi_api.Data.Entities.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("be_photosi_api.Data.Entities.Order", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("be_photosi_api.Data.Entities.Product", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("be_photosi_api.Data.Entities.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

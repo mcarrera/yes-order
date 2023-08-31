@@ -13,13 +13,8 @@ namespace be_photosi_api.Data.Repositories
             this.context = context;
         }
 
-        public async Task<Guid> AddOrder(CreateOrderRequest request)
+        public async Task<Guid> AddOrder(Order order)
         {
-            var order = new Order
-            {
-                
-            };
-
             context.Orders.Add(order);
             await context.SaveChangesAsync();
 

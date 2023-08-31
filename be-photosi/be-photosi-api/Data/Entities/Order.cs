@@ -3,9 +3,13 @@
     public class Order
     {
         public Guid Id { get; set; }
-        public List<OrderProduct> Products { get; set; }
-        public Address DeliveryAddress { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
+
+        public Guid AddressId { get; set; }
+        public Address DeliveryAddress { get; set; }
+
+        public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
     }
 }

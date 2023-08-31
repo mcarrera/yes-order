@@ -23,9 +23,16 @@ namespace be_photosi_api.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> AddOrder([FromBody] CreateOrderRequest request)
         {
-            var connection = EnvironmentVariables.GetDatabaseConnection();
-            var response = mediator.Send(request);
-            return Ok(connection);
+            try
+            {
+                var response = await mediator.Send(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error in creating a new order : {ex}");
+            }
+
         }
     }
 }

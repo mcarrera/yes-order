@@ -25,12 +25,12 @@ namespace be_photosi_api.Data.Entities
 
             modelBuilder.Entity<OrderProduct>()
                 .HasOne(op => op.Order)
-                .WithMany(o => o.Products)
+                .WithMany(o => o.OrderProducts)
                 .HasForeignKey(op => op.OrderId);
 
             modelBuilder.Entity<OrderProduct>()
                 .HasOne(op => op.Product)
-                .WithMany() // No navigation property for related orders on Product
+                .WithMany(p => p.OrderProducts)
                 .HasForeignKey(op => op.ProductId);
         }
 
