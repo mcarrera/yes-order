@@ -3,7 +3,7 @@ using be_photosi_api.Data.Repositories.Interfaces;
 using be_photosi_api.Handlers.Dto;
 using MediatR;
 
-namespace be_photosi_api.Handlers.Command
+namespace be_photosi_api.Handlers
 {
     public class CreateOrderRequestHandler : IRequestHandler<CreateOrderRequest, Guid>
     {
@@ -36,7 +36,7 @@ namespace be_photosi_api.Handlers.Command
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error in CreateOrderRequestHandler.Handler ${0} ", ex);
+                _logger.LogError("Error in CreateOrderRequestHandler.Handle ${0} ", ex);
                 throw;
             }
         }

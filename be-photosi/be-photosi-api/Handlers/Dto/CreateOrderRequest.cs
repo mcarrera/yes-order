@@ -7,7 +7,7 @@ namespace be_photosi_api.Handlers.Dto
     {
         public Guid UserId { get; set; }
         public Guid AddressId { get; set; }
-        public List<ProductRequest> Products { get; set; }
+        public List<ProductDto> Products { get; set; }
 
     }
 }

@@ -7,5 +7,6 @@ namespace be_photosi_api.Data.Repositories.Interfaces
     {
 
         Task<Guid> AddOrder(Order request);
+        Task<List<Order>> GetOrders();
     }
 }

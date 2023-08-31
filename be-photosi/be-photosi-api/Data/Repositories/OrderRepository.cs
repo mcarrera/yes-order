@@ -29,5 +29,26 @@ namespace be_photosi_api.Data.Repositories
                 throw;
             }
         }
+
+        public async Task<List<Order>> GetOrders()
+        {
+            try
+            {
+               var orders = await _context.Orders
+                   .Include(order => order.OrderProducts) 
+                   .ThenInclude(orderProduct => orderProduct.Product)
+                   .ThenInclude(product=>product.Category)
+                   .Include(order=>order.User)
+                   .Include(order=>order.DeliveryAddress)
+                   .ToListAsync();
+
+               return orders;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
