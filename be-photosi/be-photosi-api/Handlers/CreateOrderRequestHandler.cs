@@ -9,11 +9,8 @@ namespace be_photosi_api.Handlers
         // todo: logging
         public Task<Guid> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
         {
-            var order = new Order
-            {
-
-            };
-
+            
+            return null;
         }
     }
 }

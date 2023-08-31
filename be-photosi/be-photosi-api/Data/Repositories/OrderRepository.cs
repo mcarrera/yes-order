@@ -17,9 +17,7 @@ namespace be_photosi_api.Data.Repositories
         {
             var order = new Order
             {
-                Products = request.Products,
-                DeliveryAddress = request.DeliveryAddress,
-                User = request.User
+                
             };
 
             context.Orders.Add(order);
