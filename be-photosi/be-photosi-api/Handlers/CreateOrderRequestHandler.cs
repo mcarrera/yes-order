@@ -21,7 +21,7 @@ namespace be_photosi_api.Handlers
             var orderId = Guid.NewGuid();
             var order = new Order
             {
-                Id = Guid.NewGuid(),
+                Id = orderId,
                 UserId = request.UserId,
                 AddressId = request.AddressId,
                 OrderProducts = request.Products.Select(x => new OrderProduct
