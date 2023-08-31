@@ -17,5 +17,22 @@ namespace be_photosi_api.Data.Entities
         {
             optionsBuilder.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderProduct>()
+                .HasKey(op => new { op.OrderId, op.ProductId });
+
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(op => op.Order)
+                .WithMany(o => o.Products)
+                .HasForeignKey(op => op.OrderId);
+
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(op => op.Product)
+                .WithMany() // No navigation property for related orders on Product
+                .HasForeignKey(op => op.ProductId);
+        }
+
     }
 }

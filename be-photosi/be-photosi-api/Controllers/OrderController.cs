@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using be_photosi_api.Handlers.Dto;
 
 namespace be_photosi_api.Controllers
 {
@@ -20,10 +21,10 @@ namespace be_photosi_api.Controllers
 
         [HttpPost("AddOrder")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult> AddOrder()
+        public async Task<ActionResult> AddOrder([FromBody] CreateOrderRequest request)
         {
             var connection = EnvironmentVariables.GetDatabaseConnection();
-
+            var response = mediator.Send(request);
             return Ok(connection);
         }
     }

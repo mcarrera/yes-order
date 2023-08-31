@@ -3,7 +3,7 @@
     public class Order
     {
         public Guid Id { get; set; }
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
+        public List<OrderProduct> Products { get; set; }
         public Address DeliveryAddress { get; set; }
         public User User { get; set; }
 
