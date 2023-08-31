@@ -10,13 +10,13 @@ namespace be_photosi_api.Controllers
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly IMediator mediator;
-        private readonly ILogger<OrderController> logger;
+        private readonly IMediator _mediator;
+        private readonly ILogger<OrderController> _logger;
 
         public OrderController(IMediator mediator, ILogger<OrderController> logger)
         {
-            this.mediator = mediator;
-            this.logger = logger;
+            _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost("AddOrder")]
@@ -25,12 +25,12 @@ namespace be_photosi_api.Controllers
         {
             try
             {
-                var response = await mediator.Send(request);
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                logger.LogError("Error in creating new order: ", ex);
+                _logger.LogError("Error in creating new order: ", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error in creating a new order : {ex}");
             }
         }

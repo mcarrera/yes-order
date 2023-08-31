@@ -7,18 +7,27 @@ namespace be_photosi_api.Data.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        public readonly AppDbContext context;
-        public OrderRepository(AppDbContext context)
+        private readonly AppDbContext _context;
+        private readonly ILogger<OrderRepository> _logger;
+        public OrderRepository(AppDbContext context, ILogger<OrderRepository> logger)
         {
-            this.context = context;
+            _context = context;
+            _logger = logger;
         }
 
         public async Task<Guid> AddOrder(Order order)
         {
-            context.Orders.Add(order);
-            await context.SaveChangesAsync();
-
-            return order.Id;
+            try
+            {
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+                return order.Id;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error in Adding Order ${0}", ex.ToString());
+                throw;
+            }
         }
     }
 }
