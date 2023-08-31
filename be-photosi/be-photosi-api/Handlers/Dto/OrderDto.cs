@@ -1,6 +1,6 @@
 ﻿namespace be_photosi_api.Handlers.Dto
 {
-    public class OrdersDto
+    public class OrderDto
     {
         public Guid Id { get; set; }
         public string? Username { get; set; }

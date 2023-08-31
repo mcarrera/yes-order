@@ -5,7 +5,7 @@ using MediatR;
 
 namespace be_photosi_api.Handlers
 {
-    public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrdersDto>>
+    public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrderDto>>
     {
 
         private readonly ILogger<GetOrdersQueryHandler> _logger;
@@ -16,12 +16,12 @@ namespace be_photosi_api.Handlers
             _logger = logger;
             _orderRepository = orderRepository;
         }
-        public async Task<List<OrdersDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var orders = await _orderRepository.GetOrders();
-                var response = orders.Select(x => new OrdersDto
+                var response = orders.Select(x => new OrderDto
                 {
                     Id = x.Id,
                     Username = x.User.Username,
