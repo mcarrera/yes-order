@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/be-photosi/be-photosi-api/Properties/launchSettings.json
