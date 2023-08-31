@@ -3,7 +3,7 @@ using be_photosi_api.Data.Repositories.Interfaces;
 using be_photosi_api.Handlers.Dto;
 using MediatR;
 
-namespace be_photosi_api.Handlers
+namespace be_photosi_api.Handlers.Command
 {
     public class CreateOrderRequestHandler : IRequestHandler<CreateOrderRequest, Guid>
     {
