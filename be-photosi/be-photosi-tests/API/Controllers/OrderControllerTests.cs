@@ -101,5 +101,4 @@ namespace be_photosi_tests.API.Controllers
         }
     }
 
-    // Add mock classes for your DTOs and other dependencies if needed.
 }
