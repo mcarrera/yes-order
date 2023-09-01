@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "35d91d3a-9ddc-4e81-b8df-4af4bdcf0358",
+		"name": "PhotoSi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11859714"
+	},
+	"item": [
+		{
+			"name": "AddOrder Giulia Firenze",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"15FE0764-967E-40C8-AAC3-7E15E83E3549\",\r\n  \"addressId\": \"38E0390D-AE4B-4574-9802-951A0B19D396\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"886AA8A6-D9D8-496D-A1E5-409ADAC707F5\",\r\n      \"quantity\": 21\r\n    },\r\n    {\r\n      \"productId\": \"136674F9-DD46-4E95-BAD2-8C4E3C93F865\",\r\n      \"quantity\": 22\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5051/api/Order/AddOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5051",
+					"path": [
+						"api",
+						"Order",
+						"AddOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddOrder Maria Venezia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"E29BFD61-692B-4495-BCD2-32B5D765CC53\",\r\n  \"addressId\": \"2B04D613-C9E7-45AA-90A7-E36AE21BADD7\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"A844D40B-1320-4B05-B103-AB9534EFF6CB\",\r\n      \"quantity\": 100\r\n    },\r\n    {\r\n      \"productId\": \"136674F9-DD46-4E95-BAD2-8C4E3C93F865\",\r\n      \"quantity\": 101\r\n    },\r\n    {\r\n      \"productId\": \"43469CF5-36E3-435D-9F82-0664BF8D2B68\",\r\n      \"quantity\": 102\r\n    },\r\n    {\r\n      \"productId\": \"F6C4C91B-521A-4C56-A408-294A8CBC7BF2\",\r\n      \"quantity\": 103\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5051/api/Order/AddOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5051",
+					"path": [
+						"api",
+						"Order",
+						"AddOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddOrder Bad Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"15FE0764-967E-40C8-AAC3-7E15E83E3549\",\r\n  \"addressId\": \"38E0390D-AE4B-4574-9802-951A0B19D396\",\r\n  \"products\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5051/api/Order/AddOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5051",
+					"path": [
+						"api",
+						"Order",
+						"AddOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5051/api/Order/GetOrders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5051",
+					"path": [
+						"api",
+						"Order",
+						"GetOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteOrder",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5051/api/Order/DeleteOrder?orderId=A5DAA3A2-E9AB-4568-BAC1-1CCC88509858",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5051",
+					"path": [
+						"api",
+						"Order",
+						"DeleteOrder"
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "A5DAA3A2-E9AB-4568-BAC1-1CCC88509858"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteOrder Not Found",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5051/api/Order/DeleteOrder/?orderId=A5DAA3A2-E9AB-4568-BAC1-1CCC8850985B",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5051",
+					"path": [
+						"api",
+						"Order",
+						"DeleteOrder",
+						""
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "A5DAA3A2-E9AB-4568-BAC1-1CCC8850985B"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

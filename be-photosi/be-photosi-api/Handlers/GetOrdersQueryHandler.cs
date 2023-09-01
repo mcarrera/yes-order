@@ -41,7 +41,7 @@ namespace be_photosi_api.Handlers
                         Name = x.Product.Name,
                         Category = x.Product.Category.Name,
                         Quantity = x.Quantity
-                    }).ToList()
+                    }).OrderBy(p=>p.Quantity).ToList()
 
                 }).ToList();
 
