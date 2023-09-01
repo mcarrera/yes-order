@@ -25,8 +25,10 @@ namespace be_photosi_api.Handlers
                 {
                     Id = x.Id,
                     Username = x.User.Username,
-                    Address = new AddressDto
+                    UserId = x.User.Id,
+                    DeliverAddress = new AddressDto
                     {
+                        Id = x.DeliveryAddress.Id,
                         City = x.DeliveryAddress.City,
                         Country = x.DeliveryAddress.Country,
                         PostalCode = x.DeliveryAddress.PostalCode,
