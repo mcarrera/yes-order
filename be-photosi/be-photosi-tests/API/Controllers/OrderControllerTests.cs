@@ -45,6 +45,25 @@ namespace be_photosi_tests.API.Controllers
             Assert.Equal(response, okResult.Value);
         }
 
+
+        [Fact]
+        public async Task AddOrder_InvalidRequest_ReturnsBadRequestResult()
+        {
+            // Arrange
+            var createOrderRequest = _fixture.Create<CreateOrderRequest>();
+            createOrderRequest.Products = null;
+            var response = Guid.NewGuid();
+
+          
+            // Act
+            var result = await _controller.AddOrder(createOrderRequest);
+
+            // Assert
+            var badObjectResult = Assert.IsType<BadRequestObjectResult>(result);
+           
+        }
+
+
         [Fact]
         public async Task AddOrder_Exception_ReturnsInternalServerError()
         {
@@ -91,6 +110,7 @@ namespace be_photosi_tests.API.Controllers
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
         }
+      
         [Fact]
         public async Task DeleteOrder_ValidRequest_ReturnsOkResult()
         {

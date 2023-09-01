@@ -27,11 +27,10 @@ namespace be_photosi_api.Controllers
             try
             {
                 var validation = await new CreateOrderRequestValidator().ValidateAsync(request);
-                var response = await _mediator.Send(request);
-                
-                if (validation.IsValid)
+                if (!validation.IsValid)
                     return BadRequest(validation.Errors);
 
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
