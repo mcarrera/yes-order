@@ -1,8 +1,6 @@
-﻿using be_photosi_api.Common;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using be_photosi_api.Handlers;
 using be_photosi_api.Handlers.Query;
 using be_photosi_api.Handlers.Command;
 

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoFixture;
-using Azure;
-using be_photosi_api.Common;
+﻿using AutoFixture;
 using be_photosi_api.Controllers;
-using be_photosi_api.Handlers;
 using be_photosi_api.Handlers.Command;
 using be_photosi_api.Handlers.Dto;
 using be_photosi_api.Handlers.Query;
@@ -16,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Xunit;
 
 namespace be_photosi_tests.API.Controllers
 {

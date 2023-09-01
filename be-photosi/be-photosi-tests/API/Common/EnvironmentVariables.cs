@@ -1,5 +1,3 @@
-using be_photosi_api.Common;
-using Xunit;
 using Xunit.Sdk;
 
 namespace be_photosi_tests.API.Common

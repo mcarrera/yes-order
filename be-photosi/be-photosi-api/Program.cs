@@ -1,12 +1,10 @@
 using MediatR;
 using System.Reflection;
 using be_photosi_api.Common;
-using Microsoft.Extensions.DependencyInjection;
 using be_photosi_api.Data.Entities;
 using be_photosi_api.Data.Repositories;
 using be_photosi_api.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

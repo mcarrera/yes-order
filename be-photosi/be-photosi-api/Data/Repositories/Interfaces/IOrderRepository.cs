@@ -1,5 +1,4 @@
 ﻿using be_photosi_api.Data.Entities;
-using be_photosi_api.Handlers.Dto;
 
 namespace be_photosi_api.Data.Repositories.Interfaces
 {
