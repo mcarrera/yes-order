@@ -5,13 +5,19 @@ using be_photosi_api.Data.Entities;
 using be_photosi_api.Data.Repositories;
 using be_photosi_api.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(s =>
+{
+    s.ImplicitlyValidateChildProperties = true;
+    s.ImplicitlyValidateRootCollectionElements = true;
+    s.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
 
 builder.Services.AddEndpointsApiExplorer();
 

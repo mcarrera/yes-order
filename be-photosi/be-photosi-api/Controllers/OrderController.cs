@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using be_photosi_api.Handlers.Query;
 using be_photosi_api.Handlers.Command;
+using be_photosi_api.Validators;
 
 namespace be_photosi_api.Controllers
 {
@@ -25,7 +26,12 @@ namespace be_photosi_api.Controllers
         {
             try
             {
+                var validation = await new CreateOrderRequestValidator().ValidateAsync(request);
                 var response = await _mediator.Send(request);
+                
+                if (validation.IsValid)
+                    return BadRequest(validation.Errors);
+
                 return Ok(response);
             }
             catch (Exception ex)
