@@ -7,6 +7,9 @@ using be_photosi_api.Validators;
 
 namespace be_photosi_api.Controllers
 {
+    /// <summary>
+    /// Controller to manage orders
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
@@ -20,6 +23,11 @@ namespace be_photosi_api.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Add an order
+        /// </summary>
+        /// <param name="request">A request to create an order</param>
+        /// <returns></returns>
         [HttpPost("AddOrder")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> AddOrder([FromBody] CreateOrderRequest request)
@@ -40,6 +48,10 @@ namespace be_photosi_api.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all the non deleted orders for all the users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetOrders")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> GetOrders()
@@ -56,6 +68,11 @@ namespace be_photosi_api.Controllers
             }
         }
 
+        /// <summary>
+        /// Mark an order as deleted (soft delete)
+        /// </summary>
+        /// <param name="orderId">The order to mark for deletion</param>
+        /// <returns></returns>
 
         [HttpDelete("DeleteOrder")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
