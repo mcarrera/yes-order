@@ -25,3 +25,4 @@ select o.id as OrderId, p.Name as Product, c.Name as CategoryName, u.Username, a
 
 -- delete from orders
 -- delete from OrderProduct
+-- update orders set isdeleted = 0
