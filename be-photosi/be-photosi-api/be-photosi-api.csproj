@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Command\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

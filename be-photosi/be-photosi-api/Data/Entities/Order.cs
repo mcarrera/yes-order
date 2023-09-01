@@ -11,5 +11,7 @@
 
         public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
+        public bool IsDeleted { get; set; }
+
     }
 }

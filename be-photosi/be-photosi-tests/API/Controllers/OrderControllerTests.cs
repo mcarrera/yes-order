@@ -8,6 +8,7 @@ using Azure;
 using be_photosi_api.Common;
 using be_photosi_api.Controllers;
 using be_photosi_api.Handlers;
+using be_photosi_api.Handlers.Command;
 using be_photosi_api.Handlers.Dto;
 using be_photosi_api.Handlers.Query;
 using MediatR;
@@ -99,6 +100,56 @@ namespace be_photosi_tests.API.Controllers
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
         }
+        [Fact]
+        public async Task DeleteOrder_ValidRequest_ReturnsOkResult()
+        {
+            // Arrange
+            var orderId = Guid.NewGuid();
+            
+            _mediatorMock.Setup(m => m.Send(It.IsAny<DeleteOrderRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+
+            // Act
+            var result = await _controller.DeleteOrder(orderId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(true, okResult.Value);
+        }
+
+        [Fact]
+        public async Task DeleteOrder_InvalidRequest_ReturnsNotFoundResult()
+        {
+            // Arrange
+            var orderId = Guid.NewGuid();
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<DeleteOrderRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            // Act
+            var result = await _controller.DeleteOrder(orderId);
+
+            // Assert
+            var okResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(false, okResult.Value);
+        }
+
+        [Fact]
+        public async Task DeleteOrder_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            var orderId = Guid.NewGuid();
+            _mediatorMock.Setup(m => m.Send(It.IsAny<DeleteOrderRequest>(), It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new Exception("Test Exception"));
+
+            // Act
+            var result = await _controller.DeleteOrder(orderId);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
+
     }
 
 }

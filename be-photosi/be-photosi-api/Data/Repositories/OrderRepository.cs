@@ -25,7 +25,27 @@ namespace be_photosi_api.Data.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error in Adding Order ${0}", ex.ToString());
+                _logger.LogError("Error in Adding Order $", ex);
+                throw;
+            }
+        }
+
+        public async Task<bool> DeleteOrder(Guid id)
+        {
+            try
+            {
+                var order = await _context.Orders.FirstOrDefaultAsync(x => x.Id == id);
+                if (order == null) return false;
+
+                order.IsDeleted = true;
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error in Deleting Order ", ex);
                 throw;
             }
         }
@@ -34,15 +54,16 @@ namespace be_photosi_api.Data.Repositories
         {
             try
             {
-               var orders = await _context.Orders
-                   .Include(order => order.OrderProducts) 
-                   .ThenInclude(orderProduct => orderProduct.Product)
-                   .ThenInclude(product=>product.Category)
-                   .Include(order=>order.User)
-                   .Include(order=>order.DeliveryAddress)
-                   .ToListAsync();
+                var orders = await _context.Orders
+                    .Include(order => order.OrderProducts)
+                    .ThenInclude(orderProduct => orderProduct.Product)
+                    .ThenInclude(product => product.Category)
+                    .Include(order => order.User)
+                    .Include(order => order.DeliveryAddress)
+                    .Where(order => !order.IsDeleted)
+                    .ToListAsync();
 
-               return orders;
+                return orders;
             }
             catch (Exception e)
             {

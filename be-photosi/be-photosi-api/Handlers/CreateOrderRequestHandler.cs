@@ -1,6 +1,6 @@
 ﻿using be_photosi_api.Data.Entities;
 using be_photosi_api.Data.Repositories.Interfaces;
-using be_photosi_api.Handlers.Dto;
+using be_photosi_api.Handlers.Command;
 using MediatR;
 
 namespace be_photosi_api.Handlers

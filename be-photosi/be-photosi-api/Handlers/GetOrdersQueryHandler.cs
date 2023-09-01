@@ -9,7 +9,7 @@ namespace be_photosi_api.Handlers
     {
 
         private readonly ILogger<GetOrdersQueryHandler> _logger;
-        private IOrderRepository _orderRepository;
+        private readonly IOrderRepository _orderRepository;
 
         public GetOrdersQueryHandler(ILogger<GetOrdersQueryHandler> logger, IOrderRepository orderRepository)
         {
@@ -25,6 +25,14 @@ namespace be_photosi_api.Handlers
                 {
                     Id = x.Id,
                     Username = x.User.Username,
+                    Address = new AddressDto
+                    {
+                        City = x.DeliveryAddress.City,
+                        Country = x.DeliveryAddress.Country,
+                        PostalCode = x.DeliveryAddress.PostalCode,
+                        State = x.DeliveryAddress.State,
+                        StreetAddress = x.DeliveryAddress.StreetAddress,
+                    },
                     Products = x.OrderProducts.Select(x => new ProductDto
                     {
                         ProductId = x.ProductId,
