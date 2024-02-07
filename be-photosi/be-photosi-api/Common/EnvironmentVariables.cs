@@ -21,6 +21,7 @@
             parameters.Add($"Database={database}");
             parameters.Add($"User Id={user}");
             parameters.Add($"Password={password}");
+            parameters.Add("TrustServerCertificate=true");
 
             return string.Join(";", parameters);
         }
