@@ -28,7 +28,7 @@
 
         private static void ThrowEnvironmentVariableMissingException(string variableName)
         {
-            throw new Exception($"Environment variable \"{variableName}\" is missing");
+            //throw new Exception($"Environment variable \"{variableName}\" is missing");
         }
     }
 }
