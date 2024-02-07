@@ -42,10 +42,10 @@ INSERT INTO [dbo].[Products]
            ,[Name]
            ,[CategoryId])
      VALUES
-           (NEWID(), 'Televisore LED 50 pollici', '3F01D770-63B5-4368-ADA1-9481710B9B61'),
-           (NEWID(), 'Maglia a maniche lunghe', 'F65EC106-3FEE-433E-A7F2-095C0CA9B5C9'),
-           (NEWID(), 'Set da cucina in acciaio', '3DFFB386-3706-47C4-96F1-7335F4E7EAFD'),
-           (NEWID(), 'Parmigiano Reggiano DOP','3DFFB386-3706-47C4-96F1-7335F4E7EAFD'),
-           (NEWID(), 'Crema viso idratante', 'F873DB60-AF66-4029-ADBD-7826BA121B9A' );
-GO
+           (NEWID(), 'Televisore LED 50 pollici', (SELECT Id FROM [Category] WHERE [Name] = 'Elettronica')),
+           (NEWID(), 'Maglia a maniche lunghe', (SELECT Id FROM [Category] WHERE [Name] = 'Abbigliamento')),
+           (NEWID(), 'Set da cucina in acciaio', (SELECT Id FROM [Category] WHERE [Name] = 'Casa e Giardino')),
+           (NEWID(), 'Parmigiano Reggiano DOP', (SELECT Id FROM [Category] WHERE [Name] = 'Alimentari')),
+           (NEWID(), 'Crema viso idratante', (SELECT Id FROM [Category] WHERE [Name] = 'Bellezza'));
 
+GO
