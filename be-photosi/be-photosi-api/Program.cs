@@ -32,7 +32,7 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
-});
+}, ServiceLifetime.Scoped);
 
 var app = builder.Build();
 

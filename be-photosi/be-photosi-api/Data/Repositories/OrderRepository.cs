@@ -1,6 +1,7 @@
 ﻿using be_photosi_api.Data.Entities;
 using be_photosi_api.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace be_photosi_api.Data.Repositories
 {
@@ -27,6 +28,48 @@ namespace be_photosi_api.Data.Repositories
                 _logger.LogError("Error in Adding Order $", ex);
                 throw;
             }
+        }
+
+        public async Task<Guid> CreateRandomOrders(int numberOfOrders)
+        {
+            var orders = new List<Order>();
+
+            Random random = new();
+           
+            var userIds = _context.Users.Select(x=>x.Id).ToList();
+            var productIds = _context.Products.Select(x => x.Id).ToList();
+            var addressIds = _context.Address.Select(x => x.Id).ToList();
+
+            for (int i = 0; i < numberOfOrders; i++)
+            {
+
+                // select the products            
+                var n = random.Next(1, 11);
+
+                var products =productIds
+                    .OrderBy(r => Guid.NewGuid())
+                    .Take(n)
+                    .ToList();
+
+                var orderId = Guid.NewGuid();
+
+                var order = new Order
+                {
+                    Id = orderId,
+                    AddressId =addressIds.OrderBy(r => Guid.NewGuid()).Take(1).First(),
+                    UserId = userIds.OrderBy(r => Guid.NewGuid()).Take(1).First(),
+                    OrderProducts = products.Select(x => new OrderProduct
+                    {
+                        OrderId = orderId,
+                        ProductId = x,
+                        Quantity = random.Next(1, 100)
+                    }).ToList(),
+                };
+                orders.Add(order);
+            }
+                await _context.Orders.AddRangeAsync(orders);
+                await _context.SaveChangesAsync();
+            return Guid.NewGuid();
         }
 
         public async Task<bool> DeleteOrder(Guid id)
