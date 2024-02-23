@@ -1,0 +1,32 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: yes-order/yes-order-api/
+
+    - name: Build
+      run: dotnet build yes-order.api.csproj --no-restore
+      working-directory: yes-order/yes-order-api/
+
+    - name: Test
+      run: dotnet test yes-order.tests.csproj --verbosity normal
+      working-directory: yes-order/yes-order-tests/
