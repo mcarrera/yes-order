@@ -19,6 +19,8 @@ builder.Services.AddControllers().AddFluentValidation(s =>
     s.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 });
 
+//builder.Services.AddFluentValidationAutoValidation();
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
@@ -38,9 +40,21 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
 }
 var app = builder.Build();
 
+// Apply migrations
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+    context.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
+});
 
 builder.Logging.AddConsole();
 
