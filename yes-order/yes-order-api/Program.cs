@@ -1,10 +1,7 @@
 using MediatR;
 using System.Reflection;
-using yes_orders_api.Common;
-using yes_orders_api.Data.Entities;
 using yes_orders_api.Data.Repositories;
 using yes_orders_api.Data.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,13 +26,13 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
-//if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
-//{
-//    builder.Services.AddDbContext<AppDbContext>(options =>
-//    {
-//        options.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
-//    });
-//}
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+    {
+        options.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
+    });
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

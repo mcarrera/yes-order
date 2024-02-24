@@ -25,6 +25,9 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
         working-directory: yes-order/yes-order-api/
+      - name: Test
+        run: dotnet test yes-order.tests.csproj --verbosity normal
+        working-directory: yes-order/yes-order-tests/
 
       - name: dotnet publish
         run: dotnet publish yes-order.api.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
