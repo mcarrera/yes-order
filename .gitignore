@@ -395,3 +395,6 @@ FodyWeavers.xsd
 *.msp
 
 /yes-order/yes-order-api/Properties/launchSettings.json
+/yes-order/yes-order-api/yes-order.db
+/yes-order/yes-order-api/yes-order.db-shm
+/yes-order/yes-order-api/yes-order.db-wal
