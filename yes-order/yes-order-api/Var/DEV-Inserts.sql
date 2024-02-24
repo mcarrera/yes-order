@@ -8,7 +8,6 @@ INSERT INTO [dbo].[Users]
            (NEWID(), 'Giulia'),
            (NEWID(), 'Alessandro');
 
-USE [photosi]
 GO
 
 INSERT INTO [dbo].[Address]

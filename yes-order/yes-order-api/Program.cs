@@ -1,7 +1,10 @@
 using MediatR;
 using System.Reflection;
+using yes_orders_api.Common;
+using yes_orders_api.Data.Entities;
 using yes_orders_api.Data.Repositories;
 using yes_orders_api.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,17 +33,14 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
 {
     builder.Services.AddDbContext<AppDbContext>(options =>
     {
-        options.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
+        options.UseSqlite("Data Source=yes-order.db");
     });
 }
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 builder.Logging.AddConsole();
 

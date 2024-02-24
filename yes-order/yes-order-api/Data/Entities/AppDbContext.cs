@@ -12,12 +12,7 @@ namespace yes_orders_api.Data.Entities
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
-        }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderProduct>()

@@ -24,7 +24,7 @@ namespace yes_orders_api.Data.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error in Adding Order $", ex);
+                _logger.LogError("Error in Adding Order {0}", ex);
                 throw;
             }
         }
@@ -44,7 +44,7 @@ namespace yes_orders_api.Data.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error in Deleting Order ", ex);
+                _logger.LogError("Error in Deleting Order {0}", ex);
                 throw;
             }
         }
