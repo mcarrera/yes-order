@@ -29,21 +29,21 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
-if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
-{
-    builder.Services.AddDbContext<AppDbContext>(options =>
-    {
-        options.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
-    });
-}
+//if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
+//{
+//    builder.Services.AddDbContext<AppDbContext>(options =>
+//    {
+//        options.UseSqlServer(EnvironmentVariables.GetDatabaseConnection());
+//    });
+//}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 builder.Logging.AddConsole();
 
