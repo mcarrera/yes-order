@@ -44,21 +44,7 @@ namespace yes_order_api.Migrations
                              ('{Guid.NewGuid()}', 'Parmigiano Reggiano DOP', (SELECT Id FROM[Category] WHERE[Name] = 'Alimentari')),
                              ('{Guid.NewGuid()}', 'Crema viso idratante', (SELECT Id FROM[Category] WHERE[Name] = 'Bellezza'));");
 
-            // create few orders
-
-
-            for (int i = 0; i < 10; i++)
-            {
-                var orderId = Guid.NewGuid().ToString();
-                migrationBuilder.Sql(@$"INSERT INTO [Orders]           ([Id]           ,[UserId]           ,[AddressId]           ,[IsDeleted])     VALUES
-                               ('{orderId}',(SELECT Id FROM Users ORDER BY RANDOM() LIMIT 1), (SELECT Id FROM Address ORDER BY RANDOM() LIMIT 1) ,0)");
-
-                // add some random products
-                migrationBuilder.Sql($@"INSERT INTO [OrderProduct] ([OrderId] ,[ProductId] ,[Quantity]) VALUES
-                       ('{orderId}', (SELECT Id FROM Products ORDER BY RANDOM() LIMIT 1),1)");
-
-            }
-
+            migrationBuilder.Sql(@$"INSERT INTO [ORDERS}");
         }
 
         /// <inheritdoc />
