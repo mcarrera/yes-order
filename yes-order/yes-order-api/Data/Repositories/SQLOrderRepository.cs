@@ -55,9 +55,9 @@ namespace yes_orders_api.Data.Repositories
             try
             {
                 var orders = await _context.Orders
-                    .Include(order => order.OrderProducts)
-                    .ThenInclude(orderProduct => orderProduct.Product)
-                    .ThenInclude(product => product.Category)
+                    //.Include(order => order.OrderProducts)
+                    //.ThenInclude(orderProduct => orderProduct.Product)
+                    //.ThenInclude(product => product.Category)
                     .Include(order => order.User)
                     .Include(order => order.Address)
                     .Where(order => !order.IsDeleted).Take(10)

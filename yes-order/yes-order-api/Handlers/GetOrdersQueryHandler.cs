@@ -35,13 +35,13 @@ namespace yes_orders_api.Handlers
                         State = x.Address.State,
                         StreetAddress = x.Address.StreetAddress,
                     },
-                    Products = x.OrderProducts.Select(x => new ProductDto
-                    {
-                        ProductId = x.ProductId,
-                        Name = x.Product.Name,
-                        Category = x.Product.Category.Name,
-                        Quantity = x.Quantity
-                    }).OrderBy(p=>p.Quantity).ToList()
+                    //Products = x.OrderProducts.Select(x => new ProductDto
+                    //{
+                    //    ProductId = x.ProductId,
+                    //    Name = x.Product.Name,
+                    //    Category = x.Product.Category.Name,
+                    //    Quantity = x.Quantity
+                    //}).OrderBy(p=>p.Quantity).ToList()
 
                 }).ToList();
 

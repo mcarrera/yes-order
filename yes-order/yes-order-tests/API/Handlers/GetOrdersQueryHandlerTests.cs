@@ -42,7 +42,7 @@ namespace yes_orders_tests.API.Handlers
                         Username = _fixture.Create<string>()
                     },
                     Address = _fixture.Create<Address>(),
-                    OrderProducts = new List<OrderProduct>(),
+                    //OrderProducts = new List<OrderProduct>(),
                     IsDeleted = _fixture.Create<bool>(),
                 });
             }

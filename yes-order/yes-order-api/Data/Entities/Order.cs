@@ -7,10 +7,9 @@
         public User User { get; set; }
 
         public Guid AddressId { get; set; }
-        public Address DeliveryAddress { get; set; }
+        public Address Address { get; set; }
 
-        public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
-
+        public IList<Product> Products { get; set; } = new List<Product>();
         public bool IsDeleted { get; set; }
 
     }

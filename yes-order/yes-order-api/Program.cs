@@ -34,21 +34,16 @@ builder.Services.AddScoped<IOrderRepository, CosmosDBRepository>();
 
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
 {
-    //builder.Services.AddDbContext<AppDbContext>(options =>
-    //{
-    //    options.UseSqlite("Data Source=yes-order.db");
-    //});
-
     builder.Services.AddDbContext<CosmosDbContext>(optionBuilder => optionBuilder
-        .UseCosmos(
-                connectionString: EnvironmentVariables.GetCosmosDBConnectionString(),
-                databaseName: "yes-orders",
-                 cosmosOptionsAction: options =>
-                 {
-                     options.ConnectionMode(Microsoft.Azure.Cosmos.ConnectionMode.Direct);
-                     options.MaxRequestsPerTcpConnection(20);
-                     options.MaxTcpConnectionsPerEndpoint(32);
-                 }));
+      .UseCosmos(
+              connectionString: EnvironmentVariables.GetCosmosDBConnectionString(),
+              databaseName: "yes-orders",
+               cosmosOptionsAction: options =>
+               {
+                   options.ConnectionMode(Microsoft.Azure.Cosmos.ConnectionMode.Direct);
+                   options.MaxRequestsPerTcpConnection(20);
+                   options.MaxTcpConnectionsPerEndpoint(32);
+               }));
 
 }
 var app = builder.Build();
@@ -59,7 +54,11 @@ app.UseSwaggerUI();
 
 builder.Logging.AddConsole();
 
-
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<CosmosDbContext>();
+    await context.Database.EnsureCreatedAsync();
+}
 
 app.UseRouting();
 app.MapControllers();
