@@ -1,8 +1,10 @@
-﻿namespace yes_orders_api.Common
+﻿using Microsoft.AspNetCore.Hosting.Server;
+
+namespace yes_orders_api.Common
 {
     public class EnvironmentVariables
     {
-        public static string GetDatabaseConnection()
+        public static string GetSQLDatabaseConnection()
         {
             List<string> parameters = new();
 
@@ -15,13 +17,25 @@
             if (string.IsNullOrWhiteSpace(database)) ThrowEnvironmentVariableMissingException("DB_NAME");
             if (string.IsNullOrWhiteSpace(user)) ThrowEnvironmentVariableMissingException("DB_USER");
             if (string.IsNullOrWhiteSpace(password)) ThrowEnvironmentVariableMissingException("DB_PASSWORD");
-          
+
 
             parameters.Add($"Server={server}");
             parameters.Add($"Database={database}");
             parameters.Add($"User Id={user}");
             parameters.Add($"Password={password}");
             parameters.Add("TrustServerCertificate=true");
+
+            return string.Join(";", parameters);
+        }
+
+        public static string GetCosmosDBConnectionString()
+        {
+            List<string> parameters = new();
+            var accountEndpoint = Environment.GetEnvironmentVariable("AccountEndpoint");
+            var accountKey = Environment.GetEnvironmentVariable("AccountKey");
+
+            parameters.Add($"AccountEndpoint={accountEndpoint}");
+            parameters.Add($"AccountKey={accountKey}");
 
             return string.Join(";", parameters);
         }

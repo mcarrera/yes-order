@@ -6,6 +6,9 @@ using yes_orders_api.Data.Repositories;
 using yes_orders_api.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
+using yes_order_api.Data;
+using System.Security.AccessControl;
+using yes_order_api.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,14 +30,26 @@ builder.Services.AddHttpContextAccessor();
 
 // inject items
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderRepository, CosmosDBRepository>();
 
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Testing")
 {
-    builder.Services.AddDbContext<AppDbContext>(options =>
-    {
-        options.UseSqlite("Data Source=yes-order.db");
-    });
+    //builder.Services.AddDbContext<AppDbContext>(options =>
+    //{
+    //    options.UseSqlite("Data Source=yes-order.db");
+    //});
+
+    builder.Services.AddDbContext<CosmosDbContext>(optionBuilder => optionBuilder
+        .UseCosmos(
+                connectionString: EnvironmentVariables.GetCosmosDBConnectionString(),
+                databaseName: "yes-orders",
+                 cosmosOptionsAction: options =>
+                 {
+                     options.ConnectionMode(Microsoft.Azure.Cosmos.ConnectionMode.Direct);
+                     options.MaxRequestsPerTcpConnection(20);
+                     options.MaxTcpConnectionsPerEndpoint(32);
+                 }));
+
 }
 var app = builder.Build();
 

@@ -15,7 +15,7 @@ namespace yes_orders_tests.API.Common
             Environment.SetEnvironmentVariable("DB_USER", "DB_USER");
             Environment.SetEnvironmentVariable("DB_PASSWORD", "DB_PASSWORD");
             // Act
-            var connectionString = yes_orders_api.Common.EnvironmentVariables.GetDatabaseConnection();
+            var connectionString = yes_orders_api.Common.EnvironmentVariables.GetSQLDatabaseConnection();
             // Assert
             Assert.NotEmpty(connectionString);
         }
@@ -34,7 +34,7 @@ namespace yes_orders_tests.API.Common
             // Act and Assert
             Assert.Throws<Exception>(() =>
             {
-                yes_orders_api.Common.EnvironmentVariables.GetDatabaseConnection();
+                yes_orders_api.Common.EnvironmentVariables.GetSQLDatabaseConnection();
             });
         }
 

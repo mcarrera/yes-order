@@ -1,14 +1,15 @@
 ﻿using yes_orders_api.Data.Entities;
 using yes_orders_api.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using yes_order_api.Data;
 
 namespace yes_orders_api.Data.Repositories
 {
-    public class OrderRepository : IOrderRepository
+    public class SQLOrderRepository : IOrderRepository
     {
-        private readonly AppDbContext _context;
-        private readonly ILogger<OrderRepository> _logger;
-        public OrderRepository(AppDbContext context, ILogger<OrderRepository> logger)
+        private readonly SQLDbContext _context;
+        private readonly ILogger<SQLOrderRepository> _logger;
+        public SQLOrderRepository(SQLDbContext context, ILogger<SQLOrderRepository> logger)
         {
             _context = context;
             _logger = logger;
@@ -58,7 +59,7 @@ namespace yes_orders_api.Data.Repositories
                     .ThenInclude(orderProduct => orderProduct.Product)
                     .ThenInclude(product => product.Category)
                     .Include(order => order.User)
-                    .Include(order => order.DeliveryAddress)
+                    .Include(order => order.Address)
                     .Where(order => !order.IsDeleted).Take(10)
                     .ToListAsync();
 

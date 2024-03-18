@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using yes_orders_api.Data.Entities;
+using yes_order_api.Data;
+
 
 #nullable disable
 
 namespace yes_order_api.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SQLDbContext))]
     [Migration("20240224143243_InsertData")]
     partial class InsertData
     {

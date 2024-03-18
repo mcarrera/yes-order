@@ -28,12 +28,12 @@ namespace yes_orders_api.Handlers
                     UserId = x.User.Id,
                     DeliverAddress = new AddressDto
                     {
-                        Id = x.DeliveryAddress.Id,
-                        City = x.DeliveryAddress.City,
-                        Country = x.DeliveryAddress.Country,
-                        PostalCode = x.DeliveryAddress.PostalCode,
-                        State = x.DeliveryAddress.State,
-                        StreetAddress = x.DeliveryAddress.StreetAddress,
+                        Id = x.Address.Id,
+                        City = x.Address.City,
+                        Country = x.Address.Country,
+                        PostalCode = x.Address.PostalCode,
+                        State = x.Address.State,
+                        StreetAddress = x.Address.StreetAddress,
                     },
                     Products = x.OrderProducts.Select(x => new ProductDto
                     {

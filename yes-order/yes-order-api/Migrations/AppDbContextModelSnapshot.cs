@@ -3,13 +3,14 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using yes_orders_api.Data.Entities;
+using yes_order_api.Data;
+
 
 #nullable disable
 
 namespace yes_order_api.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SQLDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

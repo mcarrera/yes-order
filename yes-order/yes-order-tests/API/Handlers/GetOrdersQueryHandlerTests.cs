@@ -41,7 +41,7 @@ namespace yes_orders_tests.API.Handlers
                         Id = Guid.NewGuid(),
                         Username = _fixture.Create<string>()
                     },
-                    DeliveryAddress = _fixture.Create<Address>(),
+                    Address = _fixture.Create<Address>(),
                     OrderProducts = new List<OrderProduct>(),
                     IsDeleted = _fixture.Create<bool>(),
                 });

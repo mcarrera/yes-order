@@ -1,18 +1,19 @@
 ﻿using yes_orders_api.Common;
 using Microsoft.EntityFrameworkCore;
+using yes_orders_api.Data.Entities;
 
-namespace yes_orders_api.Data.Entities
+namespace yes_order_api.Data
 {
-    public class AppDbContext : DbContext
+    public class SQLDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public SQLDbContext(DbContextOptions<SQLDbContext> options) : base(options)
         {
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderProduct>()

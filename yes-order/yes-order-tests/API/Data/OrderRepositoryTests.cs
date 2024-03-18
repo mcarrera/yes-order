@@ -9,26 +9,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using yes_order_api.Data;
 
 namespace yes_orders_tests.API.Data
 {
     public class OrderRepositoryTests : BaseTest, IDisposable
     {
-        private OrderRepository _orderRepository;
-        private AppDbContext _context;
+        private SQLOrderRepository _orderRepository;
+        private SQLDbContext _context;
 
 
         public OrderRepositoryTests()
         {
           
-            var options = new DbContextOptionsBuilder<AppDbContext>()
+            var options = new DbContextOptionsBuilder<SQLDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDatabase").Options;
 
-            _context = new AppDbContext(options);
+            _context = new SQLDbContext(options);
 
-            var logger = Mock.Of<ILogger<OrderRepository>>();
+            var logger = Mock.Of<ILogger<SQLOrderRepository>>();
 
-            _orderRepository = new OrderRepository(_context, logger);
+            _orderRepository = new SQLOrderRepository(_context, logger);
           
         }
 
