@@ -25,12 +25,7 @@ namespace yes_orders_api.Handlers
                     Id = orderId,
                     UserId = request.UserId,
                     AddressId = request.AddressId,
-                    //OrderProducts = request.Products.Select(x => new OrderProduct
-                    //{
-                    //    OrderId = orderId,
-                    //    ProductId = x.ProductId,
-                    //    Quantity = x.Quantity,
-                    //}).ToList()
+                    Items = request.Products.Select(x=>new OrderItem { ProductId=x.ProductId, Quantity=x.Quantity}).ToList(),
                 };
                 return await _orderRepository.AddOrder(order);
             }

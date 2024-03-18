@@ -15,9 +15,12 @@ namespace yes_order_api.Data.Repositories
             _logger = logger;
 
         }
-        public Task<Guid> AddOrder(Order request)
+        public async Task<Guid> AddOrder(Order request)
         {
-            throw new NotImplementedException();
+            _context.Add(request);
+            
+            await _context.SaveChangesAsync();
+            return new Guid();
         }
 
         public Task<bool> DeleteOrder(Guid id)
